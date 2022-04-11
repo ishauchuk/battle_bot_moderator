@@ -25,4 +25,10 @@ async def send_dice(event: Message):
 @bot.on(events.ChatAction(
     func=lambda e: (e.user_added or e.user_joined) and e.user_id != bot.me.id))
 async def greet(event: events.ChatAction.Event):
-    await event.respond('Шалом!')
+    await event.respond('Shalom!')
+
+
+@bot.on(events.NewMessage(func=lambda e: e.text.lower() == '/cat'))
+async def cat(event: Message):
+    photo = open("app/cat.png", 'rb')
+    await bot.send_message(event.chat.id, file=photo)
